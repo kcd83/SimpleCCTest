@@ -33,12 +33,12 @@ namespace SimpleCCTest
 
             CreditCardInfo fixture = new CreditCardInfo()
             {
-                AcceptedCreditCardTypes = CreditCardType.Any
+                AcceptedCreditCardTypes = CreditCardType.Amex | CreditCardType.Visa
             };
 
             foreach(string test in testCases)
             {
-                Console.WriteLine("Card number {0} is {1}a valid {2}", test, fixture.ValidateCreditCard(test) ? "": "not ", fixture.GetCreditCardType(test).ToString());
+                Console.WriteLine("Card number {0} is {1}a valid {2} of length {3}", test, fixture.ValidateCreditCard(test) ? "": "not ", fixture.GetCreditCardType(test).ToString(), test.Length);
             }
             Console.ReadLine();
         }
