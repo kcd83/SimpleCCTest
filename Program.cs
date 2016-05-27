@@ -12,9 +12,6 @@ namespace SimpleCCTest
         {
             // Poor man's tests
 
-            Console.WriteLine("Do you require coffee?");
-            bool pass = true;
-
             // https://www.merchantplus.com/help/logos-test-numbers/
             // MasterCard	5431111111111111
             // Amex	341111111111111
