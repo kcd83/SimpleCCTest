@@ -56,6 +56,7 @@ namespace SimpleCCTest
                         case CreditCardType.None:
                             break;
                         case CreditCardType.Visa:
+                            validator = new VisaValidator();
                             break;
                         case CreditCardType.MasterCard:
                             break;
