@@ -9,6 +9,16 @@ namespace SimpleCCTest
 {
     class CreditCardInfo
     {
+        private static Dictionary<CreditCardType, CreditCardTypeValidator> _AvailableValidators;
+        
+        static CreditCardInfo()
+        {
+            // Probably should be injected
+            _AvailableValidators = new Dictionary<CreditCardType, CreditCardTypeValidator>();
+            _AvailableValidators.Add(CreditCardType.Amex, new AmexValidator());
+            _AvailableValidators.Add(CreditCardType.Visa, new VisaValidator());
+            // Implement more here
+        }
 
         private CreditCardType _AcceptedCreditCardTypes;
 
@@ -50,30 +60,10 @@ namespace SimpleCCTest
             {
                 if ((type & acceptedCreditCardTypes) != CreditCardType.None) // bitwise check returns type... but we don't want None either
                 {
-                    CreditCardTypeValidator validator = null;
-                    switch (type)
-                    {
-                        case CreditCardType.None:
-                            break;
-                        case CreditCardType.Visa:
-                            validator = new VisaValidator();
-                            break;
-                        case CreditCardType.MasterCard:
-                            break;
-                        case CreditCardType.Amex:
-                            validator = new AmexValidator();
-                            break;
-                        case CreditCardType.Unknown:
-                            break;
-                        case CreditCardType.Any:
-                            break;
-                        default:
-                            break;
-                    }
-                    if (validator != null)
+                    CreditCardTypeValidator validator;
+                    if (_AvailableValidators.TryGetValue(type, out validator))
                         _Validators.Add(validator);
                 }
-
             }
         }
 
